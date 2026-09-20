@@ -1,9 +1,26 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* ─── Arabic mono face ───
+   JetBrains Mono carries no Arabic glyphs, so Arabic would otherwise drop to a
+   proportional fallback. This is Cascadia Code's Arabic subset (self-hosted, 68KB,
+   OFL — see LICENSE-Cascadia-Code.txt next to the file), scoped by unicode-range so
+   it is fetched and applied for Arabic codepoints only: Latin stays JetBrains Mono,
+   and both scripts end up monospace. */
+@font-face {
+  font-family: "Cascadia Code Arabic";
+  src: url("/assets/fonts/cascadia-code-arabic.woff2") format("woff2");
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1,
+    U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74,
+    U+FE76-FEFC, U+10E60-10E7E;
+}
+
 @theme {
-  --font-sans: "Cascadia Code", monospace;
-  --font-mono: "Cascadia Code", monospace;
+  --font-sans: "Cascadia Code Arabic", "JetBrains Mono", monospace;
+  --font-mono: "Cascadia Code Arabic", "JetBrains Mono", monospace;
   --color-github-bg: #0d1117;
   --color-github-border: #30363d;
   --color-github-text: #e6edf3;
@@ -36,14 +53,14 @@ body {
   background-size: 40px 40px;
   color: var(--text-main);
   min-height: 100vh;
-  font-family: "Cascadia Code", monospace;
+  font-family: "Cascadia Code Arabic", "JetBrains Mono", monospace;
   line-height: 1.6;
   overflow-x: hidden;
 }
 
 html[lang="ar"] body {
-  font-family: "Cascadia Code", "Noto Sans Arabic", ui-sans-serif, system-ui,
-    sans-serif;
+  font-family: "Cascadia Code Arabic", "JetBrains Mono", "Noto Sans Arabic",
+    ui-sans-serif, system-ui, sans-serif;
 }
 
 html[lang="en"] #lang-toggle .lang-en {
